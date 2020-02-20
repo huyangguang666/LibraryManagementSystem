@@ -1,0 +1,18 @@
+spring:
+  freemarker:
+    suffix: .html
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/BMSystem
+    username: root
+    password: 123456
+#    schema:
+#      - classpath:sql/ticket.sql
+#      - classpath:sql/book.sql
+#      - classpath:sql/user.sql
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+server:
+  port: 8888
