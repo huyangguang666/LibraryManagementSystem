@@ -1,49 +1,36 @@
 package com.myproject.bookmanager.dao;
 
+
 import com.myproject.bookmanager.model.Ticket;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+/**
+ * Created by nowcoder on 2018/08/04 下午3:44
+ */
 @Mapper
-public interface TicketDao {
+public interface TicketDAO {
 
-    /**
-     * 添加t票
-     * @param ticket
-     * @return
-     */
-    @Insert("insert into ticket(user_id,ticket,expired_at) values(#{userId},#{ticket},#{expiredAt})")
-    int addTicket(Ticket ticket);
+  String table_name = " ticket ";
+  String insert_field = " user_id, ticket, expired_at ";
+  String select_field = " id, " + insert_field;
 
-    /**
-     * 通过用户id查询查询t票信息
-     * @param id
-     * @return
-     */
-    @Select("select * from ticket where id=#{id}")
-    Ticket selectByUserId(Integer id);
+  @Insert({"insert into", table_name, "(", insert_field,
+      ") values (#{userId},#{ticket},#{expiredAt})"})
+  int addTicket(Ticket ticket);
 
-    /**
-     * 通过门票查询t票信息
-     * @param t
-     * @return
-     */
-    @Select("select * from ticket where ticket=#{t}")
-    Ticket selectByTicket(String  t);
+  @Select({"select", select_field, "from", table_name, "where user_id=#{uid}"})
+  Ticket selectByUserId(int uid);
 
-    /**
-     * 通过门票id查询t票信息
-     * @param tid
-     */
-    @Delete("delete from ticket where id=#{tid}")
-    void deleteTicketById(Integer tid);
+  @Select({"select", select_field, "from", table_name, "where ticket=#{t}"})
+  Ticket selectByTicket(String t);
 
-    /**
-     * 删除t票
-     * @param t
-     */
-    @Delete("delete from ticket where ticket=#{t}")
-    void deleteTicket(String t);
+  @Delete({"delete from", table_name, " where id=#{tid}"})
+  void deleteTicketById(int tid);
+
+  @Delete({"delete from", table_name, " where ticket=#{t}"})
+  void deleteTicket(String t);
+
 }

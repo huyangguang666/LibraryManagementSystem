@@ -5,29 +5,23 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+/**
+ * Created by nowcoder on 2018/08/04 下午3:41
+ */
 @Mapper
-public interface BookDao {
+public interface BookDAO {
 
-    /**
-     * 查询所有图书
-     * @return
-     */
-    @Select("select * from book")
-    List<Book> selectAll();
+  String table_name = " book ";
+  String insert_field = " name, author, price ";
+  String select_field = " id, status, " + insert_field;
 
-    /**
-     * 添加图书
-     * @param book
-     * @return
-     */
-    @Insert("insert into book(name,author,price) values(#{name},#{author},#{price})")
-    int addBook(Book book);
+  @Select({"select", select_field, "from", table_name})
+  List<Book> selectAll();
 
-    /**
-     * 更新图书状态
-     * @param id
-     * @param status
-     */
-    @Update("update book set status=#{status} where id=#{id}")
-    void updateBookStatus(@Param("id") int id, @Param("status") int status);
+  @Insert({"insert into", table_name, "(", insert_field,
+      ") values (#{name},#{author},#{price})"})
+  int addBook(Book book);
+
+  @Update({"update ", table_name, " set status=#{status} where id=#{id}"})
+  void updateBookStatus(@Param("id") int id, @Param("status") int status);
 }

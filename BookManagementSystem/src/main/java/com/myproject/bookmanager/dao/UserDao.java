@@ -1,50 +1,35 @@
 package com.myproject.bookmanager.dao;
 
+
 import com.myproject.bookmanager.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+/**
+ * Created by nowcoder on 2018/08/04 下午3:41
+ */
 @Mapper
-public interface UserDao {
+public interface UserDAO {
 
-    /**
-     * 添加用户
-     * @param user
-     * @return
-     */
-    @Insert("insert into user(name,email,password) values(#{name},#{email},#{password})")
-    int addUser(User user);
+  String table_name = " user ";
+  String insert_field = " name, email, password ";
+  String select_field = " id, " + insert_field;
 
-    /**
-     * 根据id查询用户信息
-     * @param id
-     * @return
-     */
-    @Select("select * from user where id=#{id}")
-    User selectById(Integer id);
+  @Insert({"insert into", table_name, "(", insert_field,
+      ") values (#{name},#{email},#{password})"})
+  int addUser(User user);
 
-    /**
-     * 根据名称查询用户信息
-     * @param name
-     * @return
-     */
-    @Select("select * from user where name=#{name}")
-    User selectByName(String name);
+  @Select({"select", select_field, "from", table_name, "where id=#{id}"})
+  User selectById(int id);
 
-    /**
-     * 根据邮件查询邮件
-     * @param email
-     * @return
-     */
-    @Select("select * from user where email=#{email}")
-    User selectByEmail(String email);
+  @Select({"select", select_field, "from", table_name, "where name=#{name}"})
+  User selectByName(String name);
 
-    /**
-     * 更改用户密码
-     * @param user
-     */
-    @Update("update user set password=#{password} where id=#{id}")
-    void updatePassword(User user);
+  @Select({"select", select_field, "from", table_name, "where email=#{email}"})
+  User selectByEmail(String email);
+
+  @Update({"update", table_name, "set password=#{password} where id=#{id}"})
+  void updatePassword(User user);
 }

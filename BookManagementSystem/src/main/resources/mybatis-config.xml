@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
-    <settings>
-        <!-- 开启缓存 -->
-        <setting name="cacheEnabled" value="true"/>
-        <!-- 设置默认语句超时时间 -->
-        <setting name="defaultStatementTimeout" value="3000"/>
-        <!-- 开启驼峰命名 -->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!-- 允许jdbc生成主键 -->
-        <setting name="useGeneratedKeys" value="true"/>
-    </settings>
-    <!-- Continue going here -->
+
+  <settings>
+    <!-- 开启缓存 -->
+    <setting name="cacheEnabled" value="true"/>
+    <!-- 默认数据库驱动超时时间 -->
+    <setting name="defaultStatementTimeout" value="3000"/>
+    <!-- 开启驼峰命名 -->
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+    <!-- 允许jdbc生成键 -->
+    <setting name="useGeneratedKeys" value="true"/>
+  </settings>
+
 </configuration>

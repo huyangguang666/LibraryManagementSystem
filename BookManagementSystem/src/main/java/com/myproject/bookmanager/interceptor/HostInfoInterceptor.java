@@ -16,37 +16,34 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
- * 这个拦截器试图通过请求中的Cookie来寻找t票，
- * 一旦寻找到t票并成功的从数据库中找到了对应的用户，
- * 就直接放入ConcurrentUtils中(ConcurrentUtils 和 HostHolder是一回事）。
+ * Created by nowcoder on 2018/08/07 下午5:06
  */
 @Component
 public class HostInfoInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private TicketService ticketService;
+  @Autowired
+  private TicketService ticketService;
 
-    @Autowired
-    private UserService userService;
+  @Autowired
+  private UserService userService;
 
-    /**
-     * 注入host信息
-     * @param request
-     * @param response
-     * @param handler
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String t = CookieUtils.getCookie("t", request);
-        if(!StringUtils.isEmpty(t)){
-            Ticket ticket = ticketService.getTicket(t);
-            if(ticket != null && ticket.getExpiredAt().after(new Date())){
-                User host = userService.getUser(ticket.getUserId());
-                ConcurrentUtils.setHost(host);
-            }
-        }
-        return true;
+  /**
+   * 为注入host信息
+   *
+   */
+  @Override
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+      throws Exception {
+
+    String t = CookieUtils.getCookie("t", request);
+    if (!StringUtils.isEmpty(t)) {
+      Ticket ticket = ticketService.getTicket(t);
+      if (ticket != null && ticket.getExpiredAt().after(new Date())) {
+        User host = userService.getUser(ticket.getUserId());
+        ConcurrentUtils.setHost(host);
+      }
     }
+    return true;
+  }
+
 }

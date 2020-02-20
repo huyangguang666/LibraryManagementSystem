@@ -3,11 +3,12 @@ package com.myproject.bookmanager.utils;
 import java.util.UUID;
 
 /**
- * 用来生成随机字符串
+ * Created by nowcoder on 2018/08/07 下午2:38
  */
 public class UuidUtils {
 
-    public static String next(){
-        return UUID.randomUUID().toString().replace("-","a");
-    }
+  public static String next(){
+    return UUID.randomUUID().toString().replace("-","a");
+  }
+
 }

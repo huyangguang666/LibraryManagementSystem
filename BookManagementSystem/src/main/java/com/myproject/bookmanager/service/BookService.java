@@ -1,32 +1,36 @@
 package com.myproject.bookmanager.service;
 
+
+import com.myproject.bookmanager.dao.BookDAO;
 import com.myproject.bookmanager.model.Book;
+import com.myproject.bookmanager.model.enums.BookStatusEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface BookService {
+/**
+ * Created by nowcoder on 2018/08/04 下午3:41
+ */
+@Service
+public class BookService {
 
-    /**
-     * 获取所有图书信息
-     * @return
-     */
-    List<Book> getAllBook();
+  @Autowired
+  private BookDAO bookDAO;
 
-    /**
-     * 添加图书
-     * @param book
-     * @return
-     */
-    int addBook(Book book);
+  public List<Book> getAllBooks() {
+    return bookDAO.selectAll();
+  }
 
-    /**
-     * 删除图书
-     */
-    void deleteBooks(int id);
+  public int addBooks(Book book) {
+    return bookDAO.addBook(book);
+  }
 
-    /**
-     * 恢复图书
-     * @param id
-     */
-    void recoverBooks(int id);
+  public void deleteBooks(int id) {
+    bookDAO.updateBookStatus(id, BookStatusEnum.DELETE.getValue());
+  }
+
+  public void recoverBooks(int id) {
+    bookDAO.updateBookStatus(id, BookStatusEnum.NORMAL.getValue());
+  }
 }

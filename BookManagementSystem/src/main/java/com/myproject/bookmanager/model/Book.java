@@ -1,70 +1,60 @@
 package com.myproject.bookmanager.model;
 
-import java.io.Serializable;
+/**
+ * Created by nowcoder on 2018/08/04 下午3:41
+ */
+public class Book {
 
-public class Book implements Serializable {
+  private int id;
 
-    private Integer id;
+  private String name;
 
-    private String name;
+  private String author;
 
-    private String author;
+  private String price;
 
-    private String price;
+  /**
+   * {@link com.nowcoder.project.model.enums.BookStatusEnum}
+   */
+  private int status;
 
-    /**
-     * 连接com.myproject.model.enums.BookStatusEnum
-     */
-    private Integer status;
+  public int getId() {
+    return id;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getAuthor() {
+    return author;
+  }
 
-    public String getAuthor() {
-        return author;
-    }
+  public void setAuthor(String author) {
+    this.author = author;
+  }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+  public String getPrice() {
+    return price;
+  }
 
-    public String getPrice() {
-        return price;
-    }
+  public void setPrice(String price) {
+    this.price = price;
+  }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
+  public int getStatus() {
+    return status;
+  }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", price=" + price +
-                ", status=" + status +
-                '}';
-    }
+  public void setStatus(int status) {
+    this.status = status;
+  }
 }

@@ -1,27 +1,29 @@
 package com.myproject.bookmanager.service;
 
+
+import com.myproject.bookmanager.dao.UserDAO;
 import com.myproject.bookmanager.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
+/**
+ * Created by nowcoder on 2018/08/04 下午3:41
+ */
+@Service
+public class UserService {
 
-    /**
-     * 添加用户
-     * @param user
-     * @return
-     */
-    int addUser(User user);
+  @Autowired
+  private UserDAO userDAO;
 
-    /**
-     * 根据用户id获取用户信息
-     * @param uid
-     * @return
-     */
-    User getUser(int uid);
+  public int addUser(User user){
+    return userDAO.addUser(user);
+  }
 
-    /**
-     * 根据email获取用户信息
-     * @param email
-     * @return
-     */
-    User getUser(String email);
+  public User getUser(String email) {
+    return userDAO.selectByEmail(email);
+  }
+
+  public User getUser(int uid) {
+    return userDAO.selectById(uid);
+  }
 }

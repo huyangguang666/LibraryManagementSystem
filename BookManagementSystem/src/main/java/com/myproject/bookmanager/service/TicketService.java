@@ -1,37 +1,36 @@
 package com.myproject.bookmanager.service;
 
+import com.myproject.bookmanager.dao.TicketDAO;
 import com.myproject.bookmanager.model.Ticket;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface TicketService {
+/**
+ * Created by nowcoder on 2018/08/07 下午2:52
+ */
+@Service
+public class TicketService {
 
-    /**
-     * 添加t票
-     */
-    void addTicket(Ticket t);
+  @Autowired
+  private TicketDAO ticketDAO;
 
-    /**
-     * 根据用户id获取t票信息
-     * @param uid
-     * @return
-     */
-    Ticket getTicket(int uid);
+  public void addTicket(Ticket t){
+    ticketDAO.addTicket(t);
+  }
 
-    /**
-     * 根据t票名称获取t票信息
-     * @param t
-     * @return
-     */
-    Ticket getTicket(String t);
+  public Ticket getTicket(int uid){
+    return ticketDAO.selectByUserId(uid);
+  }
 
-    /**
-     * 根据t票id删除t票
-     * @param tid
-     */
-    void deleteTicket(int tid);
+  public Ticket getTicket(String t){
+    return ticketDAO.selectByTicket(t);
+  }
 
-    /**
-     * 根据t票名称删除t票
-     * @param t
-     */
-    void deleteTicket(String t);
+  public void deleteTicket(int tid){
+    ticketDAO.deleteTicketById(tid);
+  }
+
+  public void deleteTicket(String t){
+    ticketDAO.deleteTicket(t);
+  }
 }

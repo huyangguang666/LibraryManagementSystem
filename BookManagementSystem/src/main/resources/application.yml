@@ -1,3 +1,6 @@
+server:
+  port: 8888
+
 spring:
   freemarker:
     suffix: .html
@@ -13,6 +16,3 @@ spring:
 #      - classpath:sql/user.sql
 mybatis:
   config-location: classpath:mybatis-config.xml
-
-server:
-  port: 8888
